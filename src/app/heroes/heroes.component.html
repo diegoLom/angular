@@ -11,12 +11,7 @@
 
   </ul>
 
-  <h2>{{selectedHero.name | lowercase}} Details: </h2>
-
-
-  <div> <span> id:</span> {{selectedHero.id}}</div>
-  <div> <span> Power:</span> {{selectedHero.power}}</div>
-  <input [(ngModel)]="selectedHero.name" placeholder="Name Hero" />
+  <app-hero-detail [hero]="selectedHero"> </app-hero-detail>
 
 
 </body>

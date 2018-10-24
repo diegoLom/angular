@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
-import { Sexo } from '../person';
-import {HEROES} from '../mock-heroes';
+import { Hero } from '../model/hero';
+import { Sexo } from '../model/person';
+import {HEROES} from '../model/mock-heroes';
+import {HeroService} from '../services/hero/hero.service';
+
+
 
 @Component({
   selector: 'app-heroes',
@@ -12,26 +15,28 @@ import {HEROES} from '../mock-heroes';
 
 export class HeroesComponent implements OnInit {
 
-  hero : Hero  = {
-     id : null,
-     name : null,
-     power: null,
-     sexo : null
-  };
+  hero : Hero;
 
   heroes = HEROES;
 
   selectedHero: Hero;
 
+  getHeroes() : void {
+    this.heroes = this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+  }
+
+  constructor(private heroService : HeroService) { }
+
   onSelected(hero: Hero): void {
     this.selectedHero = hero;
   }
 
-  constructor() { }
-
   ngOnInit() {
     this.hero = new Hero("Meteoro de Foda-se ", 2, "Super Rol", Sexo.Masculino);
 
+    //Bad Practices
+    this.getHeroes();
   }
+
 
 }
