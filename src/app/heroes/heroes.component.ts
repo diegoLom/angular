@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../model/hero';
 import { Sexo } from '../model/person';
 import {HEROES} from '../model/mock-heroes';
-import {HeroService} from '../services/hero/hero.service';
+import { HeroService } from '../hero.service';
+
+
 
 
 
@@ -17,12 +19,12 @@ export class HeroesComponent implements OnInit {
 
   hero : Hero;
 
-  heroes = HEROES;
+  heroes = null;
 
   selectedHero: Hero;
 
   getHeroes() : void {
-    this.heroes = this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
 
   constructor(private heroService : HeroService) { }
